@@ -1,4 +1,4 @@
-from app import app, db, socketio
+from app import app, db
 from app.forms import ContactForm
 from app.models import Appoitments
 from flask import  render_template, redirect, request, url_for
