@@ -1,0 +1,84 @@
+<html>
+<head>
+    <title>AppointmentPro Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>AtendMed</h2>
+            <ul>
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><a href="#">Appointments</a></li>
+                <li><a href="#">Calendar</a></li>
+                <li><a href="#">Messages</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="header">
+                <button class="save-changes">Save Changes</button>
+                <div class="user-info">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">9</span>
+                    </div>
+                    <div class="user-name">John Doe</div>
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+            <div class="card quick-actions">
+                <h3>Quick Actions</h3>
+                <button class="btn btn-primary">New Appointment</button>
+                <button class="btn btn-secondary">View Calendar</button>
+            </div>
+            <div class="card">
+                <h3>Today's Schedule</h3>
+                <div class="schedule-item">
+                    <div>
+                        <div>Sarah Johnson</div>
+                        <div>10:00 AM - Consultation</div>
+                    </div>
+                    <div class="status confirmed">Confirmed</div>
+                </div>
+                <div class="schedule-item">
+                    <div>
+                        <div>Mike Smith</div>
+                        <div>2:30 PM - Follow-up</div>
+                    </div>
+                    <div class="status pending">Pending</div>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Recent Messages</h3>
+                {% for appoint in appoint %}
+                <div class="message-item">
+                    <div class="message-info">
+                        <i class="fas fa-envelope icon"></i>
+                        <div>
+                            <div class="name">{{appoint.name}}</div>
+                            <div class="time">{{appoint.email}}</div>
+                            <div class="text">{{appoint.message}}</div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        
+        // Quando receber um novo appoint, atualize a página
+        socket.on('update_admin', function(data) {
+            // Exemplo: adicione o novo appoint no div appointments
+            var appointContainer = document.getElementById('appointments');
+            var newAppoint = document.createElement('p');
+            newAppoint.innerHTML = `<strong>${data.name}</strong>: ${data.message} - ${data.email}`;
+            appointContainer.appendChild(newAppoint);
+        });
+    </script>
+</body>
+</html>

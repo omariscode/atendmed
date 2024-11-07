@@ -1,0 +1,115 @@
+<html>
+ <head>
+  <title>
+   Consulta Médica em Casa
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='index2.css') }}">
+ </head>
+ <body>
+  <header>
+   <h1>
+    Consulta Médica em Casa
+   </h1>
+  </header>
+  <div class="container">
+   <div class="hero">
+    <h1>
+     Cuide da sua saúde sem sair de casa
+    </h1>
+    <p>
+     Oferecemos consultas médicas no conforto do seu lar
+    </p>
+   </div>
+   <div class="services">
+    <div class="service">
+     <img alt="Imagem de um médico visitando um paciente em casa" height="200" src="https://storage.googleapis.com/a1aa/image/AokhmoRA8ZaeVafGHZCEF5lfgeBkGNYyrmW4Atr5SbygOw5OB.jpg" width="300"/>
+     <h3>
+      Consulta Geral
+     </h3>
+     <p>
+      Atendimento médico geral para todas as idades.
+     </p>
+    </div>
+    <div class="service">
+     <img alt="Imagem de um médico pediatra examinando uma criança" height="200" src="https://storage.googleapis.com/a1aa/image/Y1kG66pQ1SZKJ9x0M5GBfRqveLMfK3Y8I5kl5b6CeaqoOw5OB.jpg" width="300"/>
+     <h3>
+      Pediatria
+     </h3>
+     <p>
+      Cuidados especializados para crianças e adolescentes.
+     </p>
+    </div>
+    <div class="service">
+     <img alt="Imagem de um médico geriátrico cuidando de um idoso" height="200" src="https://storage.googleapis.com/a1aa/image/GNqNe22uMszxKa4L4yPjjcaTScbf26LVS3gdmqF2siXpDcuTA.jpg" width="300"/>
+     <h3>
+      Geriatria
+     </h3>
+     <p>
+      Atendimento especializado para idosos.
+     </p>
+    </div>
+   </div>
+   <div class="contact">
+    <h2>
+     Entre em Contato
+    </h2>
+    <p>
+     Preencha o formulário abaixo para agendar uma consulta ou tirar suas dúvidas.
+    </p>
+    <form method="POST" action="/">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.name.label }}
+            {{ form.name(class_="form-input") }}
+        </div>
+        <div>
+            {{ form.email.label }}
+            {{ form.email(class_="form-input") }}
+        </div>
+        <div>
+            {{ form.message.label }}
+            {{ form.message(class_="form-input") }}
+        </div>
+        <div>
+            {{ form.submit(class_="form-button") }}
+        </div>
+    </form>
+   </div>
+  </div>
+  <button class="floating-button" id="openModal">
+   <i class="fas fa-plus">
+   </i>
+  </button>
+  <div class="modal" id="myModal">
+   <div class="modal-content">
+    <span class="close" id="closeModal">
+     ×
+    </span>
+    <h2>
+     Entre em Contato
+    </h2>
+    </div>
+  </div>
+  <script>
+   var modal = document.getElementById("myModal");
+        var btn = document.getElementById("openModal");
+        var span = document.getElementById("closeModal");
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+  </script>
+ </body>
+</html>
